@@ -1,4 +1,4 @@
-#include "..\includes\food.h"
+#include "food.h"
 #include <cstdlib>
 #include <ctime>
 

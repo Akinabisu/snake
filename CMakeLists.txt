@@ -1,8 +1,9 @@
 cmake_minimum_required(VERSION 3.10.0)
 project(snake VERSION 0.1.0 LANGUAGES C CXX)
 
+
 add_executable(snake
-    includes/field.h
+includes/field.h
     includes/snake.h
     includes/food.h
     includes/keyboard_controller.h
@@ -17,6 +18,8 @@ add_executable(snake
     src/main.cpp 
 )
 
-include(CTest)
-enable_testing()
-
+target_include_directories(
+    snake
+    PUBLIC
+    includes
+)

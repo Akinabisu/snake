@@ -1,7 +1,9 @@
-#include "..\includes\snake.h"
-#include "..\includes\common.h"
-#include "..\includes\food.h"
+#include "snake.h"
+#include "common.h"
+#include "food.h"
+
 #include <algorithm>
+#include <exception>
 
 Snake::Snake(const Field& f) {
 	_field = &f;
@@ -13,10 +15,19 @@ int Snake::length() {
 	return _snake_coords.size();
 }
 
-
 const Coords* Snake::snakeCoords() const
 {
 	return _snake_coords.data();
+}
+
+Coords Snake::headCoords() const
+{
+    return _snake_coords[0];
+}
+
+Coords Snake::tailCoords() const
+{
+    return _snake_coords[_snake_coords.size()-1];
 }
 
 bool Snake::isSnakePart(Coords c) const
@@ -25,10 +36,8 @@ bool Snake::isSnakePart(Coords c) const
 	return it != _snake_coords.end();
 }
 
-
-//make separate food handling
-void Snake::move(Direction d) {
-	Coords head_coords = _snake_coords[0];
+void Snake::move(Direction d, bool eat) {
+	Coords head_coords = headCoords();
 
 	switch (d) {
 		case Direction::Right:
@@ -57,8 +66,12 @@ void Snake::move(Direction d) {
 			break;
 	}
 
-	if (isSnakePart(head_coords)); //TODO add handling
+	if (isSnakePart(head_coords))
+		throw "Game Over :(";
 
 	_snake_coords.insert(_snake_coords.begin(), head_coords);
-	_snake_coords.pop_back();
+	
+	if (!eat){
+		_snake_coords.pop_back();
+	}
 };

@@ -1,8 +1,8 @@
-#include "..\includes\game_logic.h"
-#include "..\includes\field.h"
-#include "..\includes\snake.h"
-#include "..\includes\keyboard_controller.h"
-#include "..\includes\food.h"
+#include "game_logic.h"
+#include "field.h"
+#include "snake.h"
+#include "keyboard_controller.h"
+#include "food.h"
 #include <thread>
 #include <iostream>
 #include <cstdlib>
@@ -23,11 +23,26 @@ void GameLogic::game() {
 
 	//TODO add exit condition
 	while (true) {
-		snake.move(keyboard_controller.currentDirection());
 
+		bool eat = food.coords()==snake.headCoords();
+
+		try
+		{
+			snake.move(keyboard_controller.currentDirection(), eat);
+			if (eat){
+				food.placeFood(field);
+			}
+		}
+		catch(const char* msg)
+		{
+			system("cls");
+			std::cout << msg << '\n';
+			break;
+		}
+		
+
+		field.addObject(food.coords(), '0');
 		field.addObject(snake.snakeCoords(), snake.length(), 'x');
-
-		//field.addObject(food.coords(), 1, '0');
 
 		//TODO fix flickering
 		std::cout << field;

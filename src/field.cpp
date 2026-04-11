@@ -1,4 +1,4 @@
-#include "..\includes\field.h"
+#include "field.h"
 #include <iostream>
 
 Field::Field(int h, int w)

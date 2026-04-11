@@ -1,5 +1,5 @@
 #include <iostream>
-#include "..\includes\game_logic.h"
+#include "game_logic.h"
 
 int main()
 {
