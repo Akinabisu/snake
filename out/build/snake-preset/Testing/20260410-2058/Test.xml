@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Site BuildName="Win32-mingw32-make"
+	BuildStamp="20260410-2058-Experimental"
+	Name="ValentineLaptop"
+	Generator="ctest-4.3.1"
+	CompilerName="C:/msys64/ucrt64/bin/g++.exe"
+	CompilerVersion="15.2.0"
+	OSName="Windows"
+	Hostname="ValentineLaptop"
+	OSRelease="10.0.26200"
+	OSVersion="Windows 10"
+	OSPlatform="AMD64"
+	Is64Bits="1"
+	VendorString="AuthenticAMD"
+	VendorID="Advanced Micro Devices"
+	FamilyID="15"
+	ModelID="8"
+	ModelName="AMD Ryzen 5 3500U with Radeon Vega Mobile Gfx"
+	ProcessorCacheSize="96"
+	NumberOfLogicalCPU="8"
+	NumberOfPhysicalCPU="4"
+	TotalVirtualMemory="896"
+	TotalPhysicalMemory="14249"
+	LogicalProcessorsPerPhysical="2"
+	ProcessorClockFrequency="2100.000000"
+	>
+	<Testing>
+		<StartDateTime>Apr 11 20:59 FLE Daylight Time</StartDateTime>
+		<StartTestTime>1775930356</StartTestTime>
+		<TestList/>
+		<EndDateTime>Apr 11 20:59 FLE Daylight Time</EndDateTime>
+		<EndTestTime>1775930356</EndTestTime>
+		<ElapsedMinutes>0</ElapsedMinutes>
+	</Testing>
+</Site>
