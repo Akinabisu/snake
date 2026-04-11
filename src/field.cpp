@@ -57,6 +57,7 @@ void Field::clear()
 		}
 	}
 }
+
 // width/height through getter?
 // TODO square field cells
 std::ostream& operator<<(std::ostream& output, const Field& f)

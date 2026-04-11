@@ -60,4 +60,5 @@ void Snake::move(Direction d) {
 	if (isSnakePart(head_coords)); //TODO add handling
 
 	_snake_coords.insert(_snake_coords.begin(), head_coords);
+	_snake_coords.pop_back();
 };
