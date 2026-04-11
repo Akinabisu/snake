@@ -1,7 +1,0 @@
-{
-	"InstallScripts" : 
-	[
-		"D:/Projects/snake/out/build/snake-preset/cmake_install.cmake"
-	],
-	"Parallel" : false
-}
