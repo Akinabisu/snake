@@ -2,6 +2,7 @@
 #include <conio.h>
 #include <thread>
 #include <chrono>
+#include <ctype.h>
 
 Direction KeyboardController::currentDirection() {
 	return _current_direction;
@@ -10,7 +11,7 @@ Direction KeyboardController::currentDirection() {
 void KeyboardController::keyListener() {
     while(true) {
         if (_kbhit()) {
-            char key = _getch();
+            char key = tolower(_getch());
             switch (key) {
                 case 'd':
                     if (_current_direction != Direction::Left) {
