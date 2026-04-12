@@ -6,11 +6,19 @@
 #include <thread>
 #include <iostream>
 #include <cstdlib>
+#include <ncurses.h>
 
 void GameLogic::game() {
+	
 	int h, w;
 	std::cout << "Enter field height and width: ";
 	std::cin >> h >> w;
+	
+	initscr();
+    cbreak();
+    noecho();
+    nodelay(stdscr, TRUE);
+    scrollok(stdscr, TRUE);
 
 	Field field = Field(h, w);
 	Snake snake = Snake(field);
@@ -35,7 +43,7 @@ void GameLogic::game() {
 		}
 		catch(const char* msg)
 		{
-			system("cls");
+			system("clear");
 			std::cout << msg << '\n';
 			break;
 		}
@@ -45,11 +53,13 @@ void GameLogic::game() {
 		field.addObject(snake.snakeCoords(), snake.length(), 'x');
 
 		//TODO fix flickering
-		std::cout << field;
+		clear();
+		mvprintw(0, 0, "%s", field.toString().c_str());
+		refresh();
 		field.clear();
 
 		std::this_thread::sleep_for(std::chrono::milliseconds(200));
-		system("cls");
+		system("clear");
 	}
 
 	if (listener.joinable())

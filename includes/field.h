@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <string>
 #include "common.h"
 
 class Field
@@ -20,4 +21,5 @@ public:
     void clear();
 
     friend std::ostream& operator<<(std::ostream& output, const Field& f);
+    std::string toString();
 };

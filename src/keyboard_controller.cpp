@@ -1,5 +1,5 @@
 #include "keyboard_controller.h"
-#include <conio.h>
+#include <ncurses.h>
 #include <thread>
 #include <chrono>
 #include <ctype.h>
@@ -8,10 +8,9 @@ Direction KeyboardController::currentDirection() {
 	return _current_direction;
 };
 
-void KeyboardController::keyListener() {
+void KeyboardController::keyListener(){    
     while(true) {
-        if (_kbhit()) {
-            char key = tolower(_getch());
+            char key = tolower(getch());
             switch (key) {
                 case 'd':
                     if (_current_direction != Direction::Left) {
@@ -34,7 +33,6 @@ void KeyboardController::keyListener() {
                     }
                     break;
             }
-        }
 
         std::this_thread::sleep_for(std::chrono::milliseconds(10));
     }

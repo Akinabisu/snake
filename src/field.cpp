@@ -86,3 +86,31 @@ std::ostream& operator<<(std::ostream& output, const Field& f)
 
 	return output;
 }
+
+std::string Field::toString(){
+	std::string result="";
+	result+=' ';
+
+	for (int i = 0; i < _width; ++i) {
+		result += '_';
+	}
+	result+='\n';
+
+	for (int i = 0; i < _height; ++i) { 
+		result+= '|';
+
+		for (int j = 0; j < _width; ++j) {
+			result+=_field[i][j];
+		}
+
+		result+= "|\n";
+	}
+
+	result+= ' ';
+	for (int i = 0; i < _width; ++i) {
+		result+= '_';
+	}
+	result+= '\n';
+
+	return result;
+}
