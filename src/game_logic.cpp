@@ -29,30 +29,25 @@ void GameLogic::game() {
 	std::thread listener([&keyboard_controller]() {
 		keyboard_controller.keyListener(); });
 
-	//TODO add exit condition
 	while (true) {
 
 		bool eat = food.coords()==snake.headCoords();
 
-		try
-		{
-			snake.move(keyboard_controller.currentDirection(), eat);
-			if (eat){
-				food.placeFood(field);
-			}
-		}
-		catch(const char* msg)
-		{
-			system("clear");
-			std::cout << msg << '\n';
-			break;
+		snake.move(keyboard_controller.currentDirection(), eat);
+
+		if (eat){
+			food.placeFood(field);
 		}
 		
+		if (snake.isDead()) {
+			system("clear");
+			std::cout << "Game Over :(" << '\n';
+			break;
+		}
 
 		field.addObject(food.coords(), '0');
 		field.addObject(snake.snakeCoords(), snake.length(), 'x');
 
-		//TODO fix flickering
 		clear();
 		mvprintw(0, 0, "%s", field.toString().c_str());
 		refresh();
@@ -64,4 +59,6 @@ void GameLogic::game() {
 
 	if (listener.joinable())
 		listener.join();
+		
+	return;
 };

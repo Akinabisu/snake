@@ -20,6 +20,6 @@ public:
     void addObject(const Coords* coords, int size, char character_to_represent_object);
     void clear();
 
+    std::string toString() const;
     friend std::ostream& operator<<(std::ostream& output, const Field& f);
-    std::string toString();
 };

@@ -3,7 +3,6 @@
 #include "food.h"
 
 #include <algorithm>
-#include <exception>
 
 Snake::Snake(const Field& f) {
 	_field = &f;
@@ -66,12 +65,17 @@ void Snake::move(Direction d, bool eat) {
 			break;
 	}
 
-	if (isSnakePart(head_coords))
-		throw "Game Over :(";
-
 	_snake_coords.insert(_snake_coords.begin(), head_coords);
 	
 	if (!eat){
 		_snake_coords.pop_back();
 	}
-};
+}
+
+bool Snake::isHeadInBody() {
+    return std::count(_snake_coords.begin(), _snake_coords.end(), headCoords()) >= 2;
+}
+
+bool Snake::isDead() {
+	return isHeadInBody();
+}

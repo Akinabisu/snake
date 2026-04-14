@@ -5,19 +5,19 @@ find_package(Curses REQUIRED)
 
 
 add_executable(snake
-includes/field.h
-includes/snake.h
-includes/food.h
-includes/keyboard_controller.h
-includes/game_logic.h
+    includes/field.h
+    includes/snake.h
+    includes/food.h
+    includes/keyboard_controller.h
+    includes/game_logic.h
 
-src/field.cpp 
-src/snake.cpp
-src/food.cpp
-src/keyboard_controller.cpp
-src/game_logic.cpp
+    src/field.cpp 
+    src/snake.cpp
+    src/food.cpp
+    src/keyboard_controller.cpp
+    src/game_logic.cpp
 
-src/main.cpp 
+    src/main.cpp 
 )
 
 target_link_libraries(snake PRIVATE ${CURSES_LIBRARIES})
