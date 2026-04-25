@@ -1,15 +1,16 @@
 #pragma once
 #include <iostream>
 #include <string>
+
 #include "common.h"
 
-class Field
-{
-private:
+class Field {
+   private:
     int _height = 0;
     int _width = 0;
     char** _field;
-public:
+
+   public:
     Field(int h, int w);
     ~Field();
 

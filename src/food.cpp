@@ -1,14 +1,11 @@
 #include "food.h"
+
 #include <cstdlib>
 #include <ctime>
 
-Coords Food::coords() const
-{
-	return _coords;
-}
+Coords Food::coords() const { return _coords; }
 
-void Food::placeFood(const Field& f)
-{
+void Food::placeFood(const Field& f) {
     srand(time(0));
 
     int x, y;
@@ -16,10 +13,7 @@ void Food::placeFood(const Field& f)
     x = rand() % f.height();
     y = rand() % f.width();
 
-    _coords = { x, y };
+    _coords = {x, y};
 }
 
-bool Food::isFood(Coords c) const
-{
-	return c==_coords;
-}
+bool Food::isFood(Coords c) const { return c == _coords; }

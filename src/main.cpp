@@ -1,8 +1,8 @@
 #include <iostream>
+
 #include "game_logic.h"
 
-int main()
-{
+int main() {
     GameLogic::game();
     return 0;
 }
