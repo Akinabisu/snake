@@ -1,9 +1,11 @@
 cmake_minimum_required(VERSION 3.10.0)
 project(snake VERSION 0.1.0 LANGUAGES C CXX)
 
+find_package(Curses REQUIRED)
+
 
 add_executable(snake
-includes/field.h
+    includes/field.h
     includes/snake.h
     includes/food.h
     includes/keyboard_controller.h
@@ -14,10 +16,11 @@ includes/field.h
     src/food.cpp
     src/keyboard_controller.cpp
     src/game_logic.cpp
-    
+
     src/main.cpp 
 )
 
+target_link_libraries(snake PRIVATE ${CURSES_LIBRARIES})
 target_include_directories(
     snake
     PUBLIC

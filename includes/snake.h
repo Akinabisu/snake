@@ -19,4 +19,6 @@ public:
 
     bool isSnakePart(Coords c) const;
     void move(Direction d, bool eat = false);
+    bool isHeadInBody();
+    bool isDead();
 };

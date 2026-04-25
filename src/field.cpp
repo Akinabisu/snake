@@ -1,5 +1,6 @@
 #include "field.h"
 #include <iostream>
+#include <unistd.h>
 
 Field::Field(int h, int w)
 {
@@ -58,31 +59,39 @@ void Field::clear()
 	}
 }
 
-// width/height through getter?
-// TODO square field cells
-std::ostream& operator<<(std::ostream& output, const Field& f)
-{
-	output << ' ';
-	for (int i = 0; i < f._width; ++i) {
-		output << '_';
+
+std::string Field::toString() const {	
+	std::string result="";
+
+	result+=' ';
+
+	for (int i = 0; i < _width; ++i) {
+		result += '_';
 	}
-	output << '\n';
+	result+='\n';
 
-	for (int i = 0; i < f._height; ++i) { 
-		output << '|';
+	for (int i = 0; i < _height; ++i) { 
+		result+= '|';
 
-		for (int j = 0; j < f._width; ++j) {
-			output << f._field[i][j];
+		for (int j = 0; j < _width; ++j) {
+			result+=_field[i][j];
 		}
 
-		output << "|\n";
+		result+= "|\n";
 	}
 
-	output << ' ';
-	for (int i = 0; i < f._width; ++i) {
-		output << '_';
+	result+= ' ';
+	for (int i = 0; i < _width; ++i) {
+		result+= '_';
 	}
-	output << '\n';
+	result+= '\n';
+
+	return result;
+}
+
+std::ostream& operator<<(std::ostream& output, const Field& f)
+{
+	output << f.toString();
 
 	return output;
 }
