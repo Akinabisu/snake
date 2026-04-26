@@ -1,7 +1,6 @@
 #pragma once
 
-struct Coords
-{
+struct Coords {
     int x = 0;
     int y = 0;
 
@@ -10,8 +9,7 @@ struct Coords
     }
 };
 
-enum class Direction
-{
+enum class Direction {
     Right,
     Down,
     Left,

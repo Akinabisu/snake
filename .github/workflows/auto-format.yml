@@ -1,0 +1,33 @@
+name: Auto Format Code
+on: [push]
+
+jobs:
+  reformat:
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: write
+      
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Clang-Format
+        run: sudo apt-get install -y clang-format
+
+      - name: Run Formatter
+        run: find . -iname "*.cpp" -o -iname "*.h" | xargs clang-format -i
+
+      - name: Check for changes
+        id: git-check
+        run: |
+          git status --porcelain
+          echo "changed=$(git status --porcelain | wc -l)" >> $GITHUB_OUTPUT
+
+      - name: Commit and Push
+        if: steps.git-check.outputs.changed > 0
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "style: auto-format C++ code"
+          git push
