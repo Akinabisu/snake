@@ -1,8 +1,7 @@
 #include <iostream>
 
-#include "game_logic.h"
-
+#include "game_logic_graphic.h"
 int main() {
-    GameLogic::game();
+    GameLogicGraphic::game();
     return 0;
 }
