@@ -1,4 +1,5 @@
-out/
 build/
-build_pi5/
+build_pi/
 CMakePresets.json
+snake_cmake
+snake_nocmake
