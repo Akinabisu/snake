@@ -29,6 +29,14 @@ void GameLogic::game() {
     food.placeFood(field);
 
     while (true) {
+        if (snake.isDead()) {
+            clear();
+            mvprintw(10, 20, "Game Over :(");
+            refresh();
+            napms(2000);
+            break;
+        }
+
         controller.updateDirection();
         bool eat = food.coords() == snake.headCoords();
 
@@ -37,13 +45,6 @@ void GameLogic::game() {
         if (eat) {
             food.placeFood(field);
         }
-
-        if (snake.isDead()) {
-            system("clear");
-            std::cout << "Game Over :(" << '\n';
-            break;
-        }
-
         field.addObject(snake.snakeCoords(), snake.length(), FieldObject::Snake);
         field.addObject(food.coords(), FieldObject::Food);
 
@@ -52,11 +53,6 @@ void GameLogic::game() {
         refresh();
         field.clear();
 
-        std::this_thread::sleep_for(std::chrono::milliseconds(200));
-        system("clear");
+        std::this_thread::sleep_for(std::chrono::milliseconds(150));
     }
-
-    // if (listener.joinable()) listener.join();
-
-    return;
 };

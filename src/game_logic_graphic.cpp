@@ -5,6 +5,7 @@
 #include "field.h"
 #include "food.h"
 #include "gui_direction_controller.h"
+#include "gui_flow_controller.h"
 #include "snake.h"
 
 const int FIELD_WIDTH = 20, FIELD_HEIGHT = 20;
@@ -31,31 +32,28 @@ void GameLogicGraphic::game() {
     Field field = Field(20, 20);
     Snake snake = Snake(field);
     Food food;
-    GuiDirectionController controller(window);
+    GuiDirectionController direction_controller(window);
+    GuiFlowController flow_controller(window);
     food.placeFood(field);
-
-    bool isGameOver = false;
 
     while (window.isOpen()) {
         sf::Event event;
-
         while (window.pollEvent(event)) {
-            if (event.type == sf::Event::Closed) window.close();
-        }
-
-        controller.updateDirection();
-
-        if (!isGameOver) {
-            bool eat = food.coords() == snake.headCoords();
-            snake.move(controller.currentDirection(), eat);
-
-            if (eat) {
-                food.placeFood(field);
+            if (event.type == sf::Event::Closed) {
+                window.close();
             }
-
-            field.addObject(food.coords(), FieldObject::Food);
-            field.addObject(snake.snakeCoords(), snake.length(), FieldObject::Snake);
         }
+
+        if (flow_controller.wantsToExit()) {
+            window.close();
+        };
+
+        if (flow_controller.wantsToRestart()) {
+            snake = Snake(field);
+            food.placeFood(field);
+        }
+
+        direction_controller.updateDirection();
 
         window.clear(sf::Color::Black);
 
@@ -70,23 +68,30 @@ void GameLogicGraphic::game() {
                     }
                 }
             }
-
-            isGameOver = true;
-        } else {
-            for (int i = 0; i < snake.length(); ++i) {
-                Coords partCoords = snake.snakeCoords()[i];
-                sf::RectangleShape snakePart(sf::Vector2f(CELL_SIZE - 2, CELL_SIZE - 2));
-                snakePart.setFillColor(sf::Color::Blue);
-                snakePart.setPosition(partCoords.x * CELL_SIZE, partCoords.y * CELL_SIZE);
-
-                window.draw(snakePart);
-            }
-
-            sf::RectangleShape foodShape(sf::Vector2f(CELL_SIZE - 2, CELL_SIZE - 2));
-            foodShape.setFillColor(sf::Color::Red);
-            foodShape.setPosition(food.coords().x * CELL_SIZE, food.coords().y * CELL_SIZE);
-            window.draw(foodShape);
         }
+
+        bool eat = food.coords() == snake.headCoords();
+        snake.move(direction_controller.currentDirection(), eat);
+
+        if (eat) {
+            food.placeFood(field);
+        }
+        field.addObject(food.coords(), FieldObject::Food);
+        field.addObject(snake.snakeCoords(), snake.length(), FieldObject::Snake);
+
+        for (int i = 0; i < snake.length(); ++i) {
+            Coords partCoords = snake.snakeCoords()[i];
+            sf::RectangleShape snakePart(sf::Vector2f(CELL_SIZE - 2, CELL_SIZE - 2));
+            snakePart.setFillColor(sf::Color::Blue);
+            snakePart.setPosition(partCoords.x * CELL_SIZE, partCoords.y * CELL_SIZE);
+
+            window.draw(snakePart);
+        }
+
+        sf::RectangleShape foodShape(sf::Vector2f(CELL_SIZE - 2, CELL_SIZE - 2));
+        foodShape.setFillColor(sf::Color::Red);
+        foodShape.setPosition(food.coords().x * CELL_SIZE, food.coords().y * CELL_SIZE);
+        window.draw(foodShape);
 
         window.display();
     }
