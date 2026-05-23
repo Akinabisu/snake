@@ -4,7 +4,11 @@
 
 #include "field.h"
 #include "food.h"
+#include "gui_direction_controller.h"
 #include "snake.h"
+
+const int FIELD_WIDTH = 20, FIELD_HEIGHT = 20;
+
 const int WINDOW_SIZE = 800;
 const int CELL_SIZE = WINDOW_SIZE / 20;
 
@@ -27,55 +31,30 @@ void GameLogicGraphic::game() {
     Field field = Field(20, 20);
     Snake snake = Snake(field);
     Food food;
+    GuiDirectionController controller(window);
     food.placeFood(field);
 
     bool isGameOver = false;
-    Direction currentDir = Direction::Right;
 
     while (window.isOpen()) {
         sf::Event event;
 
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed) window.close();
-
-            if (event.type == sf::Event::KeyPressed) {
-                switch (event.key.code) {
-                    case sf::Keyboard::W:
-                    case sf::Keyboard::Up:
-                        if (currentDir != Direction::Down) currentDir = Direction::Up;
-                        break;
-
-                    case sf::Keyboard::S:
-                    case sf::Keyboard::Down:
-                        if (currentDir != Direction::Up) currentDir = Direction::Down;
-                        break;
-
-                    case sf::Keyboard::A:
-                    case sf::Keyboard::Left:
-                        if (currentDir != Direction::Right) currentDir = Direction::Left;
-                        break;
-
-                    case sf::Keyboard::D:
-                    case sf::Keyboard::Right:
-                        if (currentDir != Direction::Left) currentDir = Direction::Right;
-                        break;
-
-                    default:
-                        break;
-                }
-            }
         }
+
+        controller.updateDirection();
 
         if (!isGameOver) {
             bool eat = food.coords() == snake.headCoords();
-            snake.move(currentDir, eat);
+            snake.move(controller.currentDirection(), eat);
 
             if (eat) {
                 food.placeFood(field);
             }
 
-            field.addObject(food.coords(), '0');
-            field.addObject(snake.snakeCoords(), snake.length(), 'x');
+            field.addObject(food.coords(), FieldObject::Food);
+            field.addObject(snake.snakeCoords(), snake.length(), FieldObject::Snake);
         }
 
         window.clear(sf::Color::Black);

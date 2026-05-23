@@ -15,3 +15,9 @@ enum class Direction {
     Left,
     Up,
 };
+
+enum class FieldObject {
+    Snake,
+    Food,
+    Empty,
+};

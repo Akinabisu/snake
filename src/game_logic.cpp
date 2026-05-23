@@ -6,34 +6,33 @@
 #include <iostream>
 #include <thread>
 
+#include "console_direction_controller.h"
+#include "direction_controller.h"
 #include "field.h"
 #include "food.h"
-#include "keyboard_controller.h"
 #include "snake.h"
 
-void GameLogic::game() {
-    int h, w;
-    std::cout << "Enter field height and width: ";
-    std::cin >> h >> w;
+const int FIELD_WIDTH = 20, FIELD_HEIGHT = 20;
 
+void GameLogic::game() {
     initscr();
     cbreak();
     noecho();
     nodelay(stdscr, TRUE);
     scrollok(stdscr, TRUE);
+    keypad(stdscr, TRUE);
 
-    Field field = Field(h, w);
+    Field field = Field(FIELD_HEIGHT, FIELD_WIDTH);
     Snake snake = Snake(field);
     Food food;
-    KeyboardController keyboard_controller;
+    ConsoleDirectionController controller;
     food.placeFood(field);
 
-    std::thread listener([&keyboard_controller]() { keyboard_controller.keyListener(); });
-
     while (true) {
+        controller.updateDirection();
         bool eat = food.coords() == snake.headCoords();
 
-        snake.move(keyboard_controller.currentDirection(), eat);
+        snake.move(controller.currentDirection(), eat);
 
         if (eat) {
             food.placeFood(field);
@@ -45,8 +44,8 @@ void GameLogic::game() {
             break;
         }
 
-        field.addObject(food.coords(), '0');
-        field.addObject(snake.snakeCoords(), snake.length(), 'x');
+        field.addObject(snake.snakeCoords(), snake.length(), FieldObject::Snake);
+        field.addObject(food.coords(), FieldObject::Food);
 
         clear();
         mvprintw(0, 0, "%s", field.toString().c_str());
@@ -57,7 +56,7 @@ void GameLogic::game() {
         system("clear");
     }
 
-    if (listener.joinable()) listener.join();
+    // if (listener.joinable()) listener.join();
 
     return;
 };

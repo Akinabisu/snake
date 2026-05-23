@@ -5,17 +5,22 @@ find_package(Curses REQUIRED)
 find_package(SFML 2.5 REQUIRED COMPONENTS graphics window system)
 
 add_executable(snake
+includes/common.h
     includes/field.h
     includes/snake.h
     includes/food.h
-    includes/keyboard_controller.h
+    includes/direction_controller.h
+    includes/console_direction_controller.h
+    includes/gui_direction_controller.h
     includes/game_logic.h
     includes/game_logic_graphic.h
 
     src/field.cpp 
     src/snake.cpp
     src/food.cpp
-    src/keyboard_controller.cpp
+    src/direction_controller.cpp
+    src/console_direction_controller.cpp
+    src/gui_direction_controller.cpp
     src/game_logic.cpp
     src/game_logic_graphic.cpp
     
