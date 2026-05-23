@@ -3,6 +3,7 @@ project(snake VERSION 0.1.0 LANGUAGES C CXX)
 
 find_package(SFML 2.5 REQUIRED COMPONENTS graphics window system)
 find_package(Curses REQUIRED COMPONENTS ncurses)
+
 add_executable(
     snake
     includes/field.h
@@ -22,7 +23,6 @@ add_executable(
     src/main.cpp 
 )
     
-
 target_include_directories(
     snake
     PUBLIC
