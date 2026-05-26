@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.10.0)
 project(snake VERSION 0.1.0 LANGUAGES C CXX)
 
-find_package(Curses REQUIRED)
 find_package(SFML 2.5 REQUIRED COMPONENTS graphics window system)
+find_package(Curses REQUIRED COMPONENTS ncurses)
 
 add_executable(snake
     includes/model/common.h
@@ -49,9 +49,7 @@ add_executable(snake
     
     src/main.cpp 
 )
-
-target_link_libraries(snake PRIVATE ${CURSES_LIBRARIES})
-target_link_libraries(snake PRIVATE sfml-graphics sfml-window sfml-system)
+    
 target_include_directories(
     snake
     PUBLIC

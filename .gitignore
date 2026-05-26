@@ -1,3 +1,3 @@
-out/
 build/
+build_pi/
 CMakePresets.json
