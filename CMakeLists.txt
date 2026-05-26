@@ -49,14 +49,17 @@ add_executable(snake
     
     src/main.cpp 
 )
+
+target_link_libraries(snake 
+    PRIVATE 
+    sfml-graphics 
+    sfml-window 
+    sfml-system 
+    ncurses)
     
 target_include_directories(
     snake
     PUBLIC
-    sfml-graphics 
-    sfml-window 
-    sfml-system 
-    ncurses
     includes
     includes/model
     includes/view
