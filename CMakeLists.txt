@@ -53,6 +53,10 @@ add_executable(snake
 target_include_directories(
     snake
     PUBLIC
+    sfml-graphics 
+    sfml-window 
+    sfml-system 
+    ncurses
     includes
     includes/model
     includes/view
