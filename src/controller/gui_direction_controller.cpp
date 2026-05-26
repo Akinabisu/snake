@@ -2,7 +2,7 @@
 
 GuiDirectionController::GuiDirectionController(GuiFlowController& flow_controller,
                                                sf::RenderWindow& window)
-    : _flow_controller(flow_controller), _window(window) {};
+    : _flow_controller(flow_controller), _window(window){};
 
 void GuiDirectionController::updateDirection() {
     sf::Keyboard::Key key = _flow_controller.getLastKeyPressed();
