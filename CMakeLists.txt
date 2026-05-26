@@ -27,8 +27,7 @@ add_executable(snake
 
     includes/game_engine.h
     
-
-    src/model/field.cpp 
+    src/model/field.cpp
     src/model/snake.cpp
     src/model/food.cpp
 
@@ -57,4 +56,8 @@ target_include_directories(
     snake
     PUBLIC
     includes
+    includes/model
+    includes/view
+    includes/controller
+    includes/factory
 )
