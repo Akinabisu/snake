@@ -23,4 +23,5 @@ class Field {
 
     std::string toString() const;
     friend std::ostream& operator<<(std::ostream& output, const Field& f);
+    const FieldObject* operator[](int row) const;
 };

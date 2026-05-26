@@ -8,4 +8,5 @@ class DirectionController {
    public:
     Direction currentDirection();
     virtual void updateDirection() = 0;
+    void SetDirection(Direction new_direction);
 };

@@ -6,11 +6,12 @@
 class GuiFlowController : public GameFlowController {
    private:
     sf::RenderWindow& _window;
+    sf::Keyboard::Key _last_key_pressed = sf::Keyboard::Unknown;
 
    public:
-    GuiFlowController(sf::RenderWindow& window) : _window(window) {};
+    GuiFlowController(sf::RenderWindow& window);
+    sf::Keyboard::Key getLastKeyPressed() const;
 
-    bool wantsToExit() override;
-
-    bool wantsToRestart() override;
+    void updateEvents() override;
+    void exit() override;
 };

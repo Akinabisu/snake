@@ -1,9 +1,35 @@
 #include "gui_flow_controller.h"
 
-bool GuiFlowController::wantsToExit() {
-    return _window.hasFocus() && sf::Keyboard::isKeyPressed(sf::Keyboard::E);
+sf::Keyboard::Key GuiFlowController::getLastKeyPressed() const { return _last_key_pressed; };
+
+GuiFlowController::GuiFlowController(sf::RenderWindow& window) : _window(window) {}
+
+void GuiFlowController::updateEvents() {
+    _wants_to_restart = false;
+    _last_key_pressed = sf::Keyboard::Unknown;
+
+    sf::Event event;
+    while (_window.pollEvent(event)) {
+        if (event.type == sf::Event::Closed) {
+            _wants_to_exit = true;
+        }
+
+        if (event.type == sf::Event::KeyPressed) {
+            if (event.key.code == sf::Keyboard::E) {
+                _wants_to_exit = true;
+            }
+            if (event.key.code == sf::Keyboard::R) {
+                _wants_to_restart = true;
+            }
+            _last_key_pressed = event.key.code;
+        }
+        sf::Keyboard::Key k = event.key.code;
+        if (k == sf::Keyboard::W || k == sf::Keyboard::A || k == sf::Keyboard::S ||
+            k == sf::Keyboard::D || k == sf::Keyboard::Up || k == sf::Keyboard::Down ||
+            k == sf::Keyboard::Left || k == sf::Keyboard::Right) {
+            _last_key_pressed = k;
+        }
+    }
 }
 
-bool GuiFlowController::wantsToRestart() {
-    return _window.hasFocus() && sf::Keyboard::isKeyPressed(sf::Keyboard::R);
-}
+void GuiFlowController::exit() { _window.close(); }

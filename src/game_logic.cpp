@@ -7,52 +7,65 @@
 #include <thread>
 
 #include "console_direction_controller.h"
-#include "direction_controller.h"
+#include "console_flow_controller.h"
+#include "console_renderer.h"
 #include "field.h"
 #include "food.h"
 #include "snake.h"
 
-const int FIELD_WIDTH = 20, FIELD_HEIGHT = 20;
+const int FPS = 10;
+const int FIELD_SIZE = 20;
 
 void GameLogic::game() {
-    initscr();
-    cbreak();
-    noecho();
-    nodelay(stdscr, TRUE);
-    scrollok(stdscr, TRUE);
-    keypad(stdscr, TRUE);
-
-    Field field = Field(FIELD_HEIGHT, FIELD_WIDTH);
+    Field field = Field(FIELD_SIZE, FIELD_SIZE);
     Snake snake = Snake(field);
     Food food;
-    ConsoleDirectionController controller;
+
+    ConsoleRenderer renderer;
+    ConsoleFlowController flow_controller;
+    ConsoleDirectionController direction_controller(flow_controller);
+
     food.placeFood(field);
+    bool isGameOver = false;
 
     while (true) {
-        if (snake.isDead()) {
-            clear();
-            mvprintw(10, 20, "Game Over :(");
-            refresh();
-            napms(2000);
+        flow_controller.updateEvents();
+
+        if (flow_controller.wantsToExit()) {
+            flow_controller.exit();
             break;
-        }
+        };
 
-        controller.updateDirection();
-        bool eat = food.coords() == snake.headCoords();
-
-        snake.move(controller.currentDirection(), eat);
-
-        if (eat) {
+        if (flow_controller.wantsToRestart()) {
+            snake = Snake(field);
             food.placeFood(field);
+            direction_controller.SetDirection(Direction::Right);
+            isGameOver = false;
         }
-        field.addObject(snake.snakeCoords(), snake.length(), FieldObject::Snake);
-        field.addObject(food.coords(), FieldObject::Food);
 
-        clear();
-        mvprintw(0, 0, "%s", field.toString().c_str());
-        refresh();
-        field.clear();
+        if (snake.isDead()) {
+            isGameOver = true;
+        }
 
-        std::this_thread::sleep_for(std::chrono::milliseconds(150));
+        if (isGameOver) {
+            renderer.renderGameOver();
+        } else {
+            direction_controller.updateDirection();
+
+            bool eat = food.coords() == snake.headCoords();
+
+            snake.move(direction_controller.currentDirection(), eat);
+
+            if (eat) {
+                food.placeFood(field);
+            }
+
+            field.addObject(snake.snakeCoords(), snake.length(), FieldObject::Snake);
+            field.addObject(food.coords(), FieldObject::Food);
+
+            renderer.renderField(field);
+
+            field.clear();
+        }
     }
 };

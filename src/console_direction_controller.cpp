@@ -3,39 +3,30 @@
 #include <ctype.h>
 #include <ncurses.h>
 
-void ConsoleDirectionController::updateDirection() {
-    int key = getch();
+ConsoleDirectionController::ConsoleDirectionController(const ConsoleFlowController& flow_controller)
+    : _flow(flow_controller) {}
 
-    if (key >= 0 && key <= 255) {
-        key = tolower(key);
-    }
+void ConsoleDirectionController::updateDirection() {
+    int key = _flow.getLastKeyPressed();
+
+    if (key == -1) return;
 
     switch (key) {
         case 'd':
         case KEY_RIGHT:
-            if (_current_direction != Direction::Left) {
-                _current_direction = Direction::Right;
-            }
+            if (_current_direction != Direction::Left) _current_direction = Direction::Right;
             break;
         case 's':
         case KEY_DOWN:
-            if (_current_direction != Direction::Up) {
-                _current_direction = Direction::Down;
-            }
+            if (_current_direction != Direction::Up) _current_direction = Direction::Down;
             break;
         case 'a':
         case KEY_LEFT:
-            if (_current_direction != Direction::Right) {
-                _current_direction = Direction::Left;
-            }
+            if (_current_direction != Direction::Right) _current_direction = Direction::Left;
             break;
         case 'w':
         case KEY_UP:
-            if (_current_direction != Direction::Down) {
-                _current_direction = Direction::Up;
-            }
-            break;
-        default:
+            if (_current_direction != Direction::Down) _current_direction = Direction::Up;
             break;
     }
-};
+}

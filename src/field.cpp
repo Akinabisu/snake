@@ -19,15 +19,15 @@ Field::Field(int h, int w) {
 
 Field::~Field() {
     for (int i = 0; i < _height; ++i) {
-        delete _field[i];
+        delete[] _field[i];
     }
 
-    delete _field;
+    delete[] _field;
 }
 
 int Field::height() const { return _height; }
 
-int Field::width() const { return _height; }
+int Field::width() const { return _width; }
 
 // maybe create isCellFree and change food checking
 
@@ -88,6 +88,8 @@ std::string Field::toString() const {
 
     return result;
 }
+
+const FieldObject* Field::operator[](int row) const { return _field[row]; }
 
 std::ostream& operator<<(std::ostream& output, const Field& f) {
     output << f.toString();

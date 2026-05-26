@@ -9,12 +9,19 @@ add_executable(snake
     includes/field.h
     includes/snake.h
     includes/food.h
+
     includes/direction_controller.h
     includes/console_direction_controller.h
     includes/gui_direction_controller.h
+
     includes/game_flow_controller.h
     includes/console_flow_controller.h
     includes/gui_flow_controller.h
+
+    includes/renderer.h
+    includes/console_renderer.h
+    includes/gui_renderer.h
+
     includes/game_logic.h
     includes/game_logic_graphic.h
 
@@ -22,11 +29,18 @@ add_executable(snake
     src/field.cpp 
     src/snake.cpp
     src/food.cpp
+
     src/direction_controller.cpp
     src/console_direction_controller.cpp
     src/gui_direction_controller.cpp
+
+    src/game_flow_controller.cpp
     src/console_flow_controller.cpp
     src/gui_flow_controller.cpp
+
+    src/console_renderer.cpp
+    src/gui_renderer.cpp
+
     src/game_logic.cpp
     src/game_logic_graphic.cpp
     
