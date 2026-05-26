@@ -1,12 +1,11 @@
-#include <iostream>
-
-#include "game_engine.h"
-enum class GameMode { Graphic, Console };
 #include "console_module_factory.h"
+#include "game_engine.h"
 #include "gui_module_factory.h"
 
+enum class GameMode { Graphic, Console };
+
 int main() {
-    GameMode mode = GameMode::Graphic;
+    GameMode mode = GameMode::Console;
 
     GameEngine engine;
     const int FIELD_SIZE = 20;
