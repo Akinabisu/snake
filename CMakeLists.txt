@@ -5,48 +5,46 @@ find_package(Curses REQUIRED)
 find_package(SFML 2.5 REQUIRED COMPONENTS graphics window system)
 
 add_executable(snake
-    includes/common.h
-    includes/field.h
-    includes/snake.h
-    includes/food.h
+    includes/model/common.h
+    includes/model/field.h
+    includes/model/snake.h
+    includes/model/food.h
 
-    includes/direction_controller.h
-    includes/console_direction_controller.h
-    includes/gui_direction_controller.h
+    includes/controller/direction_controller.h
+    includes/controller/console_direction_controller.h
+    includes/controller/gui_direction_controller.h
+    includes/controller/game_flow_controller.h
+    includes/controller/console_flow_controller.h
+    includes/controller/gui_flow_controller.h
 
-    includes/game_flow_controller.h
-    includes/console_flow_controller.h
-    includes/gui_flow_controller.h
+    includes/view/renderer.h
+    includes/view/console_renderer.h
+    includes/view/gui_renderer.h
 
-    includes/renderer.h
-    includes/console_renderer.h
-    includes/gui_renderer.h
-
-    includes/game_module_factory.h
-    includes/console_module_factory.h
-    includes/gui_module_factory.h
+    includes/factory/game_module_factory.h
+    includes/factory/console_module_factory.h
+    includes/factory/gui_module_factory.h
 
     includes/game_engine.h
     
 
+    src/model/field.cpp 
+    src/model/snake.cpp
+    src/model/food.cpp
 
-    src/field.cpp 
-    src/snake.cpp
-    src/food.cpp
+    src/controller/direction_controller.cpp
+    src/controller/console_direction_controller.cpp
+    src/controller/gui_direction_controller.cpp
 
-    src/direction_controller.cpp
-    src/console_direction_controller.cpp
-    src/gui_direction_controller.cpp
+    src/controller/game_flow_controller.cpp
+    src/controller/console_flow_controller.cpp
+    src/controller/gui_flow_controller.cpp
 
-    src/game_flow_controller.cpp
-    src/console_flow_controller.cpp
-    src/gui_flow_controller.cpp
+    src/view/console_renderer.cpp
+    src/view/gui_renderer.cpp
 
-    src/console_renderer.cpp
-    src/gui_renderer.cpp
-
-    src/console_module_factory.cpp
-    src/gui_module_factory.cpp
+    src/factory/console_module_factory.cpp
+    src/factory/gui_module_factory.cpp
 
     src/game_engine.cpp
     
