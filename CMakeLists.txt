@@ -22,8 +22,12 @@ add_executable(snake
     includes/console_renderer.h
     includes/gui_renderer.h
 
-    includes/game_logic.h
-    includes/game_logic_graphic.h
+    includes/game_module_factory.h
+    includes/console_module_factory.h
+    includes/gui_module_factory.h
+
+    includes/game_engine.h
+    
 
 
     src/field.cpp 
@@ -41,8 +45,10 @@ add_executable(snake
     src/console_renderer.cpp
     src/gui_renderer.cpp
 
-    src/game_logic.cpp
-    src/game_logic_graphic.cpp
+    src/console_module_factory.cpp
+    src/gui_module_factory.cpp
+
+    src/game_engine.cpp
     
     src/main.cpp 
 )

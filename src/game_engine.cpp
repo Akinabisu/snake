@@ -1,29 +1,23 @@
-#include "game_logic.h"
+#include "game_engine.h"
 
-#include <ncurses.h>
-
-#include <cstdlib>
-#include <iostream>
-#include <thread>
-
-#include "console_direction_controller.h"
-#include "console_flow_controller.h"
-#include "console_renderer.h"
 #include "field.h"
 #include "food.h"
+#include "game_module_factory.h"
 #include "snake.h"
 
 const int FPS = 10;
 const int FIELD_SIZE = 20;
 
-void GameLogic::game() {
+void GameEngine::run(GameModuleFactory& factory, int field_size, int fps) {
     Field field = Field(FIELD_SIZE, FIELD_SIZE);
     Snake snake = Snake(field);
     Food food;
 
-    ConsoleRenderer renderer;
-    ConsoleFlowController flow_controller;
-    ConsoleDirectionController direction_controller(flow_controller);
+    GameModules modules = factory.createModules(field_size, fps);
+
+    Renderer& renderer = *modules.renderer;
+    GameFlowController& flow_controller = *modules.flow_controller;
+    DirectionController& direction_controller = *modules.direction_controller;
 
     food.placeFood(field);
     bool isGameOver = false;

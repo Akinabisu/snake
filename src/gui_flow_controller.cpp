@@ -6,7 +6,6 @@ GuiFlowController::GuiFlowController(sf::RenderWindow& window) : _window(window)
 
 void GuiFlowController::updateEvents() {
     _wants_to_restart = false;
-    _last_key_pressed = sf::Keyboard::Unknown;
 
     sf::Event event;
     while (_window.pollEvent(event)) {
@@ -15,19 +14,21 @@ void GuiFlowController::updateEvents() {
         }
 
         if (event.type == sf::Event::KeyPressed) {
+            _last_key_pressed = sf::Keyboard::Unknown;
+
             if (event.key.code == sf::Keyboard::E) {
                 _wants_to_exit = true;
             }
             if (event.key.code == sf::Keyboard::R) {
                 _wants_to_restart = true;
             }
-            _last_key_pressed = event.key.code;
-        }
-        sf::Keyboard::Key k = event.key.code;
-        if (k == sf::Keyboard::W || k == sf::Keyboard::A || k == sf::Keyboard::S ||
-            k == sf::Keyboard::D || k == sf::Keyboard::Up || k == sf::Keyboard::Down ||
-            k == sf::Keyboard::Left || k == sf::Keyboard::Right) {
-            _last_key_pressed = k;
+
+            sf::Keyboard::Key k = event.key.code;
+            if (k == sf::Keyboard::W || k == sf::Keyboard::A || k == sf::Keyboard::S ||
+                k == sf::Keyboard::D || k == sf::Keyboard::Up || k == sf::Keyboard::Down ||
+                k == sf::Keyboard::Left || k == sf::Keyboard::Right) {
+                _last_key_pressed = k;
+            }
         }
     }
 }

@@ -7,7 +7,7 @@
 
 class GuiDirectionController : public DirectionController {
    private:
-    GuiFlowController _flow_controller;
+    GuiFlowController& _flow_controller;
     sf::RenderWindow& _window;
 
    public:

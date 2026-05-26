@@ -6,6 +6,8 @@ class GameFlowController {
     bool _wants_to_restart = false;
 
    public:
+    virtual ~GameFlowController() = default;
+
     bool wantsToExit() const;
     bool wantsToRestart() const;
 
