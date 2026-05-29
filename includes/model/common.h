@@ -21,3 +21,8 @@ enum class FieldObject {
     Food,
     Empty,
 };
+
+enum class GameMode {
+    Graphic,
+    Console,
+};
