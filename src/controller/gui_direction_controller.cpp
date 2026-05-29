@@ -1,8 +1,8 @@
 #include "gui_direction_controller.h"
 
-GuiDirectionController::GuiDirectionController(GuiFlowController& flow_controller,
-                                               sf::RenderWindow& window)
-    : _flow_controller(flow_controller), _window(window){};
+GuiDirectionController::GuiDirectionController(const GuiFlowController& fc,
+                                               const sf::RenderWindow& w)
+    : _flow_controller(fc), _window(w) {};
 
 void GuiDirectionController::updateDirection() {
     sf::Keyboard::Key key = _flow_controller.getLastKeyPressed();

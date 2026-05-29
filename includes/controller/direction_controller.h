@@ -10,5 +10,5 @@ class DirectionController {
 
     Direction currentDirection();
     virtual void updateDirection() = 0;
-    void SetDirection(Direction new_direction);
+    void setDirection(Direction new_direction);
 };

@@ -12,14 +12,13 @@ void GameEngine::run(GameModuleFactory& factory, int field_size, int fps) {
     Field field = Field(FIELD_SIZE, FIELD_SIZE);
     Snake snake = Snake(field);
     Food food;
+    food.placeFood(field);
 
     GameModules modules = factory.createModules(field_size, fps);
-
     Renderer& renderer = *modules.renderer;
     GameFlowController& flow_controller = *modules.flow_controller;
     DirectionController& direction_controller = *modules.direction_controller;
 
-    food.placeFood(field);
     bool isGameOver = false;
 
     while (true) {
@@ -33,7 +32,7 @@ void GameEngine::run(GameModuleFactory& factory, int field_size, int fps) {
         if (flow_controller.wantsToRestart()) {
             snake = Snake(field);
             food.placeFood(field);
-            direction_controller.SetDirection(Direction::Right);
+            direction_controller.setDirection(Direction::Right);
             isGameOver = false;
         }
 
@@ -54,12 +53,11 @@ void GameEngine::run(GameModuleFactory& factory, int field_size, int fps) {
                 food.placeFood(field);
             }
 
+            field.clear();
             field.addObject(snake.snakeCoords(), snake.length(), FieldObject::Snake);
             field.addObject(food.coords(), FieldObject::Food);
 
             renderer.renderField(field);
-
-            field.clear();
         }
     }
 };

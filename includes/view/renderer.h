@@ -7,7 +7,7 @@ class Renderer {
     int _fps;
 
    public:
-    Renderer(int window_size, int fps) : _window_size(window_size), _fps(fps) {}
+    Renderer(int window_size, int fps);
     virtual ~Renderer() = default;
 
     virtual void renderField(const Field& field) = 0;

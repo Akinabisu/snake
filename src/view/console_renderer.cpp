@@ -5,6 +5,8 @@
 #include <chrono>
 #include <thread>
 
+#include "renderer.h"
+
 ConsoleRenderer::ConsoleRenderer(int window_size, int fps) : Renderer(window_size, fps) {
     initscr();
     cbreak();

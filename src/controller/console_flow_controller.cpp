@@ -20,6 +20,7 @@ void ConsoleFlowController::updateEvents() {
         if (key == 'e') {
             _wants_to_exit = true;
         }
+
         if (key == 'r') {
             _wants_to_restart = true;
         }

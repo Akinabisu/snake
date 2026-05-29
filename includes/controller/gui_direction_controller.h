@@ -7,10 +7,11 @@
 
 class GuiDirectionController : public DirectionController {
    private:
-    GuiFlowController& _flow_controller;
-    sf::RenderWindow& _window;
+    const GuiFlowController& _flow_controller;
+    const sf::RenderWindow& _window;
 
    public:
-    GuiDirectionController(GuiFlowController& flow_controller, sf::RenderWindow& window);
+    GuiDirectionController(const GuiFlowController& fc, const sf::RenderWindow& w);
+
     void updateDirection() override;
 };

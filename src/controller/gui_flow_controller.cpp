@@ -1,13 +1,14 @@
 #include "gui_flow_controller.h"
 
-sf::Keyboard::Key GuiFlowController::getLastKeyPressed() const { return _last_key_pressed; };
+GuiFlowController::GuiFlowController(sf::RenderWindow& w) : _window(w) {};
 
-GuiFlowController::GuiFlowController(sf::RenderWindow& window) : _window(window) {}
+sf::Keyboard::Key GuiFlowController::getLastKeyPressed() const { return _last_key_pressed; };
 
 void GuiFlowController::updateEvents() {
     _wants_to_restart = false;
 
     sf::Event event;
+
     while (_window.pollEvent(event)) {
         if (event.type == sf::Event::Closed) {
             _wants_to_exit = true;

@@ -9,6 +9,5 @@ class ConsoleFlowController : public GameFlowController {
     int getLastKeyPressed() const;
 
     void updateEvents() override;
-
     void exit() override;
 };

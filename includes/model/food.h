@@ -9,5 +9,5 @@ class Food {
    public:
     Coords coords() const;
     void placeFood(const Field& f);
-    bool isFood(Coords coords) const;
+    bool isFood(const Coords& coords) const;
 };

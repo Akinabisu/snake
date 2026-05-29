@@ -21,7 +21,9 @@ GuiRenderer::GuiRenderer(int window_size, int fps)
     _window.setFramerateLimit(fps);
 }
 
-void GuiRenderer::RenderObject(int x, int y, sf::Color color) {
+sf::RenderWindow& GuiRenderer::getWindow() { return _window; }
+
+void GuiRenderer::renderObject(int x, int y, sf::Color color) {
     sf::RectangleShape shape(sf::Vector2f(_SCALE - 2, _SCALE - 2));
     shape.setPosition(x * _SCALE, y * _SCALE);
     shape.setFillColor(color);
@@ -29,8 +31,8 @@ void GuiRenderer::RenderObject(int x, int y, sf::Color color) {
     _window.draw(shape);
 }
 
-void GuiRenderer::RenderObject(const Coords& coords, sf::Color color) {
-    RenderObject(coords.x, coords.y, color);
+void GuiRenderer::renderObject(const Coords& coords, sf::Color color) {
+    renderObject(coords.x, coords.y, color);
 }
 
 void GuiRenderer::renderField(const Field& field) {
@@ -42,10 +44,10 @@ void GuiRenderer::renderField(const Field& field) {
             FieldObject object_type = field[i][j];
 
             if (object_type == FieldObject::Snake) {
-                RenderObject(coords, sf::Color::Blue);
+                renderObject(coords, sf::Color::Blue);
             }
             if (object_type == FieldObject::Food) {
-                RenderObject(coords, sf::Color::Green);
+                renderObject(coords, sf::Color::Green);
             }
         }
     }
@@ -59,12 +61,10 @@ void GuiRenderer::renderGameOver() {
     for (int i = 0; i < 10; ++i) {
         for (int j = 0; j < 20; ++j) {
             if (GAME_OVER_PATTERN[i][j] == 1) {
-                RenderObject(j, i, sf::Color::Red);
+                renderObject(j, i, sf::Color::Red);
             }
         }
     }
 
     _window.display();
 }
-
-sf::RenderWindow& GuiRenderer::getWindow() { return _window; }

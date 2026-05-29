@@ -21,7 +21,8 @@ class Field {
     void addObject(const Coords* coords, int size, FieldObject object_type);
     void clear();
 
+    const FieldObject* operator[](int row) const;
+
     std::string toString() const;
     friend std::ostream& operator<<(std::ostream& output, const Field& f);
-    const FieldObject* operator[](int row) const;
 };

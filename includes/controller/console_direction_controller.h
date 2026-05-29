@@ -5,9 +5,10 @@
 
 class ConsoleDirectionController : public DirectionController {
    private:
-    const ConsoleFlowController& _flow;
+    const ConsoleFlowController& _flow_controller;
 
    public:
-    ConsoleDirectionController(const ConsoleFlowController& flow_controller);
+    ConsoleDirectionController(const ConsoleFlowController& fc);
+
     void updateDirection() override;
 };

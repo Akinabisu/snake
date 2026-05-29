@@ -47,6 +47,8 @@ void Field::clear() {
     }
 }
 
+const FieldObject* Field::operator[](int row) const { return _field[row]; }
+
 std::string Field::toString() const {
     std::string result = "";
 
@@ -88,8 +90,6 @@ std::string Field::toString() const {
 
     return result;
 }
-
-const FieldObject* Field::operator[](int row) const { return _field[row]; }
 
 std::ostream& operator<<(std::ostream& output, const Field& f) {
     output << f.toString();

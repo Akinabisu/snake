@@ -3,13 +3,17 @@
 #include <ctype.h>
 #include <ncurses.h>
 
-ConsoleDirectionController::ConsoleDirectionController(const ConsoleFlowController& flow_controller)
-    : _flow(flow_controller) {}
+ConsoleDirectionController::ConsoleDirectionController(const ConsoleFlowController& fc)
+    : _flow_controller(fc) {}
 
 void ConsoleDirectionController::updateDirection() {
-    int key = _flow.getLastKeyPressed();
+    int key = _flow_controller.getLastKeyPressed();
 
     if (key == -1) return;
+
+    if (key >= 0 && key <= 255) {
+        key = tolower(key);
+    }
 
     switch (key) {
         case 'd':

@@ -39,6 +39,7 @@ add_executable(snake
     src/controller/console_flow_controller.cpp
     src/controller/gui_flow_controller.cpp
 
+    src/view/renderer.cpp
     src/view/console_renderer.cpp
     src/view/gui_renderer.cpp
 

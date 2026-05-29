@@ -19,7 +19,7 @@ Coords Snake::headCoords() const { return _snake_coords[0]; }
 
 Coords Snake::tailCoords() const { return _snake_coords[_snake_coords.size() - 1]; }
 
-bool Snake::isSnakePart(Coords c) const {
+bool Snake::isSnakePart(const Coords& c) const {
     auto it = std::find(_snake_coords.begin(), _snake_coords.end(), c);
     return it != _snake_coords.end();
 }
