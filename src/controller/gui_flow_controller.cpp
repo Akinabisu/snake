@@ -1,6 +1,6 @@
 #include "gui_flow_controller.h"
 
-GuiFlowController::GuiFlowController(sf::RenderWindow& w) : _window(w) {};
+GuiFlowController::GuiFlowController(sf::RenderWindow& w) : _window(w){};
 
 sf::Keyboard::Key GuiFlowController::getLastKeyPressed() const { return _last_key_pressed; };
 
