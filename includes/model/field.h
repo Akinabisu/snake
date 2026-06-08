@@ -8,7 +8,7 @@ class Field {
    private:
     int _height = 0;
     int _width = 0;
-    char** _field;
+    FieldObject** _field;
 
    public:
     Field(int h, int w);
@@ -17,9 +17,11 @@ class Field {
     int height() const;
     int width() const;
 
-    void addObject(Coords coords, char character_to_represent_object);
-    void addObject(const Coords* coords, int size, char character_to_represent_object);
+    void addObject(Coords coords, FieldObject object_type);
+    void addObject(const Coords* coords, int size, FieldObject object_type);
     void clear();
+
+    const FieldObject* operator[](int row) const;
 
     std::string toString() const;
     friend std::ostream& operator<<(std::ostream& output, const Field& f);

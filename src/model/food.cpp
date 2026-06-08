@@ -16,4 +16,4 @@ void Food::placeFood(const Field& f) {
     _coords = {x, y};
 }
 
-bool Food::isFood(Coords c) const { return c == _coords; }
+bool Food::isFood(const Coords& c) const { return c == _coords; }
