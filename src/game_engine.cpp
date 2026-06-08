@@ -5,11 +5,8 @@
 #include "game_module_factory.h"
 #include "snake.h"
 
-const int FPS = 10;
-const int FIELD_SIZE = 20;
-
 void GameEngine::run(GameModuleFactory& factory, int field_size, int fps) {
-    Field field = Field(FIELD_SIZE, FIELD_SIZE);
+    Field field = Field(field_size, field_size);
     Snake snake = Snake(field);
     Food food;
     food.placeFood(field);

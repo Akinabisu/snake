@@ -3,5 +3,5 @@
 
 class GameEngine {
    public:
-    static void run(GameModuleFactory& factory, int field_size, int fps);
+    static void run(GameModuleFactory& factory, int field_size = 20, int fps = 10);
 };

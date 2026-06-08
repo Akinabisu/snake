@@ -1,10 +1,10 @@
 #include "common.h"
 #include "factory_helper.h"
 #include "game_engine.h"
+#include "graphics_check.h"
 
 int main() {
-    GameMode mode = GameMode::Console;
-    auto factory = FactoryHelper::createFactory(mode);
+    auto factory = FactoryHelper::createFactory();
 
     GameEngine engine;
     const int FIELD_SIZE = 20;

@@ -24,9 +24,10 @@ add_executable(snake
     includes/factory/game_module_factory.h
     includes/factory/console_module_factory.h
     includes/factory/gui_module_factory.h
+    includes/factory/graphics_check.h
 
     includes/game_engine.h
-    
+
     src/model/field.cpp
     src/model/snake.cpp
     src/model/food.cpp
@@ -45,9 +46,11 @@ add_executable(snake
 
     src/factory/console_module_factory.cpp
     src/factory/gui_module_factory.cpp
+    src/factory/factory_helper.cpp
+    src/factory/graphics_check.cpp
 
     src/game_engine.cpp
-    
+
     src/main.cpp 
 )
 
@@ -56,8 +59,9 @@ target_link_libraries(snake
     sfml-graphics 
     sfml-window 
     sfml-system 
-    ncurses)
-    
+    ncurses
+)
+
 target_include_directories(
     snake
     PUBLIC

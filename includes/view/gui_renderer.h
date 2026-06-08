@@ -6,11 +6,11 @@
 
 class GuiRenderer : public Renderer {
    private:
-    sf::RenderWindow _window;
     const int _SCALE = 40;
+    sf::RenderWindow _window;
 
    public:
-    GuiRenderer(int window_size = 20, int fps = 10);
+    GuiRenderer(int window_size, int fps);
 
     sf::RenderWindow& getWindow();
 
